@@ -31,6 +31,6 @@ jobs:
         curl --fail -s -H "Content-Type: application/json" -H "Authorization: Token $PRIVADO_API_TOKEN" -H "idt: $PRIVADO_API_TOKEN" -H "data-url: /ce/integrations/customers/$PRIVADO_API_ID/docker-registry-token" $PRIVADO_API_HOST/ce/integrations/customers/$PRIVADO_API_ID/docker-registry-token?ci=true | docker login --username AWS --password-stdin $PRIVADO_DOCKER_IMAGE
     - name: Run Privado Scanner
       run: |
-        echo $(cat env)
+        echo $env
         env | grep "PRIVADO_" > $GITHUB_WORKSPACE/.privado.env
         docker run -t -v $GITHUB_WORKSPACE:/privado --env-file $GITHUB_WORKSPACE/.privado.env --privileged --pull=always $PRIVADO_DOCKER_IMAGE
